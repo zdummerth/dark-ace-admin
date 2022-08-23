@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     // It's a match! Request came from Shopify
     const order = JSON.parse(buf.toString());
     const submitted = await submitOrder(order);
-    if (submitted.every((cv) => !cv)) {
+    if (!submitted.every((cv) => !cv)) {
       //Only send email if product is included in fauna db
       await sendEmail(messsage(submitted));
     }
