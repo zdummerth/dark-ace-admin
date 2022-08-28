@@ -25,4 +25,18 @@ export default NextAuth({
   ],
   adapter: FaunaAdapter(client),
   secret: process.env.JWT_SECRET,
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      const isAllowedToSignIn = user.email === "zdummerth@gmail.com";
+      console.log("user: ", user);
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        // Return false to display a default error message
+        return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+      }
+    },
+  },
 });

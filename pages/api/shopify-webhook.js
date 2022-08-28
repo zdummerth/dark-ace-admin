@@ -43,6 +43,7 @@ export default async function handler(req, res) {
       //Only send email if product is included in fauna db
       await sendEmail(messsage(submitted));
     }
+    console.log("order created", order);
     res.status(200).json({ name: "Success" });
   } else {
     // No match! This request didn't originate from Shopify
